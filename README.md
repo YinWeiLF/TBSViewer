@@ -1,4 +1,3 @@
-## 交流群 540686217
 
 ## 说明
 
@@ -90,3 +89,5 @@ QbSdk.preInit(this, new QbSdk.PreInitCallback() {
 
 ## 博客
 http://www.jianshu.com/p/3f57d640b24d
+根据这位大神的代码，简单封装一下做成一个库，方便使用   
+
