@@ -1,0 +1,15 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="hw.tbsreviewlibrary" >
+
+<application
+android:allowBackup="true"
+android:label="@string/app_name"
+android:supportsRtl="true">
+
+<activity android:name=".FileDisplayActivity"
+    android:screenOrientation="portrait"
+    />
+
+</application>
+
+</manifest>
