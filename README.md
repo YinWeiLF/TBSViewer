@@ -13,19 +13,28 @@
 ## 效果图
 ![这里写图片描述](https://github.com/ZhongXiaoHong/superFileView/blob/master/record.gif?raw=true)
 
-##使用方式
-
+## 使用方式
+```
 allprojects {
 		repositories {
 			...
 			maven { url 'https://jitpack.io' }
 		}
 	}
+```
 
+```
 dependencies {
 	        compile 'com.github.YinWeiLF:TBSViewer:v1.0.0'
 	}
+```
 
+别忘记在application文件中初始化环境，
+
+```
+        //增加这句话
+        Utils.initX5Environment(this);
+```
 ## 常见问题
 - no suport by
 
