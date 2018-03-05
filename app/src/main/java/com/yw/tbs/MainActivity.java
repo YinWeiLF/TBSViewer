@@ -1,6 +1,5 @@
 package com.yw.tbs;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hw.tbsreviewlibrary.FileDisplayActivity;
-import pub.devrel.easypermissions.EasyPermissions;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -48,14 +46,10 @@ public class MainActivity extends AppCompatActivity {
                 holder.itemView.findViewById(R.id.item_root).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String[] perms = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
                         filePath = getFilePath(position);
-                        if (!EasyPermissions.hasPermissions(MainActivity.this, perms)) {
-                            EasyPermissions.requestPermissions(MainActivity.this, "需要访问手机存储权限！", 10086, perms);
-                        } else {
-                            FileDisplayActivity.show(MainActivity.this, filePath);
-                        }
+                        FileDisplayActivity.show(MainActivity.this, filePath);
+
                     }
                 });
                 ((TextView) holder.itemView.findViewById(R.id.item_tv)).setText(getDatas().get(position));
