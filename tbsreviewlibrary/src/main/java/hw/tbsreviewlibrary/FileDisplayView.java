@@ -4,9 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -20,28 +19,40 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Created on 2018/4/23.
+ *
+ * @author yinWei
+ */
 
-public class FileDisplayActivity extends AppCompatActivity {
+public class FileDisplayView {
 
-
-    private String TAG = "FileDisplayActivity";
+    private Context context;
+    private String TAG = "FileDisplayView";
     SuperFileView2 mSuperFileView;
 
     String filePath;
     ProgressBar progressDialog;
 
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_file_display);
-        progressDialog= (ProgressBar) findViewById(R.id.loading);
-        init();
+    public FileDisplayView(Context context) {
+        this.context=context;
+
+    }
+
+    public View initView(){
+
+     View view= LayoutInflater.from(context).inflate(R.layout.activity_file_display,null);
+     init(view);
+     return  view;
+
     }
 
 
-    public void init() {
-        mSuperFileView = (SuperFileView2) findViewById(R.id.mSuperFileView);
+    private void init(View view){
+
+        progressDialog= (ProgressBar) view.findViewById(R.id.loading);
+        mSuperFileView = (SuperFileView2) view.findViewById(R.id.mSuperFileView);
         mSuperFileView.setOnGetFilePathListener(new SuperFileView2.OnGetFilePathListener() {
             @Override
             public void onGetFilePath(SuperFileView2 mSuperFileView2) {
@@ -49,15 +60,20 @@ public class FileDisplayActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = this.getIntent();
-        String path = (String) intent.getSerializableExtra("path");
+
+    }
+
+    /**
+     * 主动调用展示文件
+     * @param path
+     */
+    public void showFile(String path){
 
         if (!TextUtils.isEmpty(path)) {
             TLog.d(TAG, "文件path:" + path);
             setFilePath(path);
         }
         mSuperFileView.show();
-
     }
 
 
@@ -74,13 +90,13 @@ public class FileDisplayActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    //主动调用
+    public void release(){
         TLog.d("FileDisplayActivity-->onDestroy");
         if (mSuperFileView != null) {
             mSuperFileView.onStopDisplay();
         }
+
     }
 
 
@@ -249,6 +265,5 @@ public class FileDisplayActivity extends AppCompatActivity {
         TLog.d(TAG,"paramString.substring(i + 1)------>"+str);
         return str;
     }
-
 
 }

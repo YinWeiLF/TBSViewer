@@ -47,8 +47,18 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        filePath = getFilePath(position);
-                        FileDisplayActivity.show(MainActivity.this, filePath);
+                        if(position<6) {
+
+                            filePath = getFilePath(position);
+                            FileDisplayActivity.show(MainActivity.this, filePath);
+
+                        }else{
+
+
+
+
+
+                        }
 
                     }
                 });
@@ -79,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         datas.add("打开本地pdf文件");
+
+        datas.add("打开视频");
     }
 
     private List<String> getDatas() {
@@ -118,6 +130,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case 5:
+                path = "/storage/emulated/0/test.pdf";
+                break;
+
+            case 6:
                 path = "/storage/emulated/0/test.pdf";
                 break;
         }
