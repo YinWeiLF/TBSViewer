@@ -16,25 +16,71 @@
 ## 使用方式
 ```
 allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
+		repositories {	
+		maven { url 'https://jitpack.io' }
 		}
 	}
 ```
 
 ```
 dependencies {
-	        compile 'com.github.YinWeiLF:TBSViewer:v1.0.0'
+
+	   compile 'com.github.YinWeiLF:TBSViewer:v1.0.4'
+	   
 	}
 ```
 
 别忘记在application文件中初始化环境，
 
+
 ```
-        //增加这句话
-        Utils.initX5Environment(this);
+//增加这句话
+Utils.initX5Environment(this);
+
 ```
+
+具体使用方式：
+
+
+**方法一：**
+
+使用FileDisplayView
+        
+
+```
+//自定义activity  fragment 的视图容器 
+flContainer= (FrameLayout) findViewById(R.id.fl_container);
+//创建FileDisplayView
+fileDisplayView=new FileDisplayView(this);
+//添加到 activity  或者 fragment中
+flContainer.addView(fileDisplayView.initView());
+
+//获取文档地址
+String path=getIntent().getStringExtra("path");
+//直接展示
+fileDisplayView.showFile(path);
+ 
+```
+**方法二**
+
+使用FileDisplayActivity
+
+
+```
+FileDisplayActivity.show(MainActivity.this, filePath);
+```
+建议使用方法一 ，方法2目前没有提供定制样式
+
+**播放视频**
+
+
+```
+传入上下文对象（activity）,视频地址即可，支持普通的http 、https、rtsp等等
+具体支持格式可以查看腾讯的文档
+VideoUtils.OpenVideo(Context context,String url);
+
+```
+
 ## 常见问题
 - no suport by
 
