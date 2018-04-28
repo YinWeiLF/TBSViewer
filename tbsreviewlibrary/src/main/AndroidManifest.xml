@@ -13,6 +13,8 @@ android:supportsRtl="true">
 
         android:name="com.tencent.smtt.sdk.VideoActivity"
 
+        android:theme="@style/videoTheme"
+
         android:configChanges="orientation|screenSize|keyboardHidden"
 
         android:exported="false"

@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import hw.tbsreviewlibrary.FileDisplayActivity;
+import hw.tbsreviewlibrary.VideoUtils;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         initDatas();
         initPaths();
+
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.mRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -55,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
                         }else{
 
 
+                            Toast.makeText(MainActivity.this,"咋回事？",1).show();
+
+                            VideoUtils.OpenVideo(MainActivity.this,"https://res.exexm.com/cw_145225549855002");
 
 
 
@@ -70,13 +77,18 @@ public class MainActivity extends AppCompatActivity {
                 return getDatas().size();
             }
         });
+
+
+
     }
 
     private void initPaths() {
     }
 
     private void initDatas() {
+
         datas.add("网络获取并打开doc文件");
+
         datas.add("打开本地doc文件");
 
 
