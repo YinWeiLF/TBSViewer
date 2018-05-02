@@ -4,9 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import java.io.File;
@@ -25,9 +29,9 @@ import retrofit2.Response;
  * @author yinWei
  */
 
-public class FileDisplayView {
+public class FileDisplayView  extends FrameLayout{
 
-    private Context context;
+
     private String TAG = "FileDisplayView";
     SuperFileView2 mSuperFileView;
 
@@ -35,16 +39,29 @@ public class FileDisplayView {
     ProgressBar progressDialog;
 
 
-    public FileDisplayView(Context context) {
-        this.context=context;
+    public FileDisplayView(@NonNull Context context) {
+        this(context,null);
 
     }
 
-    public View initView(){
+    public FileDisplayView(@NonNull Context context, @Nullable AttributeSet attrs) {
+        this(context, attrs,0);
 
-     View view= LayoutInflater.from(context).inflate(R.layout.activity_file_display,null);
+    }
+
+    public FileDisplayView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initView(context);
+
+    }
+
+
+
+    public void initView(Context context){
+
+     View view= LayoutInflater.from(context).inflate(R.layout.view_file_display,null);
+     this.addView(view);
      init(view);
-     return  view;
 
     }
 
@@ -100,6 +117,13 @@ public class FileDisplayView {
     }
 
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        release();
+
+    }
+
     public static void show(Context context, String url) {
         Intent intent = new Intent(context, FileDisplayActivity.class);
         Bundle bundle = new Bundle();
@@ -109,7 +133,7 @@ public class FileDisplayView {
 
     }
 
-    public void setFilePath(String fileUrl) {
+    private void setFilePath(String fileUrl) {
         this.filePath = fileUrl;
     }
 
@@ -129,8 +153,6 @@ public class FileDisplayView {
                 return;
             }
         }
-
-
 
         LoadFileModel.loadPdfFile(url, new Callback<ResponseBody>() {
             @Override

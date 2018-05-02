@@ -25,8 +25,8 @@ public class FileDisplayActivity extends AppCompatActivity {
 
 
     private String TAG = "FileDisplayActivity";
-    SuperFileView2 mSuperFileView;
-
+//    SuperFileView2 mSuperFileView;
+    FileDisplayView mFileDisplayView;
     String filePath;
     ProgressBar progressDialog;
 
@@ -41,13 +41,14 @@ public class FileDisplayActivity extends AppCompatActivity {
 
 
     public void init() {
-        mSuperFileView = (SuperFileView2) findViewById(R.id.mSuperFileView);
-        mSuperFileView.setOnGetFilePathListener(new SuperFileView2.OnGetFilePathListener() {
-            @Override
-            public void onGetFilePath(SuperFileView2 mSuperFileView2) {
-                getFilePathAndShowFile(mSuperFileView2);
-            }
-        });
+//        mSuperFileView = (SuperFileView2) findViewById(R.id.mSuperFileView);
+        mFileDisplayView = (FileDisplayView) findViewById(R.id.mFileDisplayView);
+//        mSuperFileView.setOnGetFilePathListener(new SuperFileView2.OnGetFilePathListener() {
+//            @Override
+//            public void onGetFilePath(SuperFileView2 mSuperFileView2) {
+//                getFilePathAndShowFile(mSuperFileView2);
+//            }
+//        });
 
         Intent intent = this.getIntent();
         String path = (String) intent.getSerializableExtra("path");
@@ -56,7 +57,11 @@ public class FileDisplayActivity extends AppCompatActivity {
             TLog.d(TAG, "文件path:" + path);
             setFilePath(path);
         }
-        mSuperFileView.show();
+//        mSuperFileView.show();
+
+        mFileDisplayView.showFile(path);
+
+
 
     }
 
@@ -78,9 +83,9 @@ public class FileDisplayActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         TLog.d("FileDisplayActivity-->onDestroy");
-        if (mSuperFileView != null) {
-            mSuperFileView.onStopDisplay();
-        }
+//        if (mSuperFileView != null) {
+//            mSuperFileView.onStopDisplay();
+//        }
     }
 
 

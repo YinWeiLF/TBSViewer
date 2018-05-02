@@ -5,8 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <hw.tbsreviewlibrary.SuperFileView2
-        android:id="@+id/mSuperFileView"
+    <!--<hw.tbsreviewlibrary.SuperFileView2-->
+        <!--android:visibility="gone"-->
+        <!--android:id="@+id/mSuperFileView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
+
+
+    <hw.tbsreviewlibrary.FileDisplayView
+        android:id="@+id/mFileDisplayView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
