@@ -17,6 +17,7 @@ public class Utils {
     public static void initX5Environment(Context context){
 
         QbSdk.initX5Environment(context,null);
+        com.blankj.utilcode.util.Utils.init(context);
         ExceptionHandler.getInstance().initConfig(context);
 
     }

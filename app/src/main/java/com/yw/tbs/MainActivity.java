@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hw.tbsreviewlibrary.FileDisplayActivity;
-import hw.tbsreviewlibrary.VideoUtils;
+import hw.tbsreviewlibrary.utils.VideoUtils;
 
 
 public class MainActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package hw.tbsreviewlibrary;
+package hw.tbsreviewlibrary.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

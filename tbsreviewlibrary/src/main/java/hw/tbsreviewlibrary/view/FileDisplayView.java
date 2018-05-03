@@ -1,14 +1,12 @@
-package hw.tbsreviewlibrary;
+package hw.tbsreviewlibrary.view;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import java.io.File;
@@ -16,62 +14,75 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import hw.tbsreviewlibrary.utils.FileImgShowUtils;
+import hw.tbsreviewlibrary.FileDisplayActivity;
+import hw.tbsreviewlibrary.LoadFileModel;
+import hw.tbsreviewlibrary.R;
+import hw.tbsreviewlibrary.SuperFileView2;
+import hw.tbsreviewlibrary.TLog;
 import hw.tbsreviewlibrary.utils.Md5Tool;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Created on 2018/4/23.
+ *
+ * @author yinWei
+ */
 
-public class FileDisplayActivity extends AppCompatActivity {
+
+public class FileDisplayView{
 
 
-    private String TAG = "FileDisplayActivity";
-//    SuperFileView2 mSuperFileView;
-//    XFileDisplayView mFileDisplayView;
+    private String TAG = "FileDisplayView";
+    SuperFileView2 mSuperFileView;
+
     String filePath;
     ProgressBar progressDialog;
 
-    private FrameLayout container;
+    private Context context;
 
+    public FileDisplayView(Context context) {
+        this.context=context;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_file_display);
-        progressDialog= (ProgressBar) findViewById(R.id.loading);
-        init();
     }
 
 
-    public void init() {
-        container=(FrameLayout)findViewById(R.id.container);
-//        mSuperFileView = (SuperFileView2) findViewById(R.id.mSuperFileView);
-//        mFileDisplayView = (XFileDisplayView) findViewById(R.id.mFileDisplayView);
-//        mSuperFileView.setOnGetFilePathListener(new SuperFileView2.OnGetFilePathListener() {
-//            @Override
-//            public void onGetFilePath(SuperFileView2 mSuperFileView2) {
-//                getFilePathAndShowFile(mSuperFileView2);
-//            }
-//        });
+    public View initView(){
 
-        Intent intent = this.getIntent();
-        String path = (String) intent.getSerializableExtra("path");
+     View view= LayoutInflater.from(context).inflate(R.layout.view_file_display,null);
+     init(view);
+
+     return view;
+    }
+
+
+    private void init(View view){
+
+        progressDialog= (ProgressBar) view.findViewById(R.id.loading);
+        mSuperFileView = (SuperFileView2) view.findViewById(R.id.mSuperFileView);
+        mSuperFileView.setOnGetFilePathListener(new SuperFileView2.OnGetFilePathListener() {
+            @Override
+            public void onGetFilePath(SuperFileView2 mSuperFileView2) {
+                getFilePathAndShowFile(mSuperFileView2);
+            }
+        });
+
+
+    }
+
+    /**
+     * 主动调用展示文件
+     * @param path
+     */
+    public void showFile(String path){
 
         if (!TextUtils.isEmpty(path)) {
             TLog.d(TAG, "文件path:" + path);
             setFilePath(path);
         }
-//        mSuperFileView.show();
-
-
-        container.addView(FileImgShowUtils.showFile(this,path));
-
-//        fileShowView.showFile(path);
-
-
-
+        mSuperFileView.show();
     }
 
 
@@ -88,13 +99,13 @@ public class FileDisplayActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    //主动调用
+    public void release(){
         TLog.d("FileDisplayActivity-->onDestroy");
-//        if (mSuperFileView != null) {
-//            mSuperFileView.onStopDisplay();
-//        }
+        if (mSuperFileView != null) {
+            mSuperFileView.onStopDisplay();
+        }
+
     }
 
 
@@ -107,7 +118,7 @@ public class FileDisplayActivity extends AppCompatActivity {
 
     }
 
-    public void setFilePath(String fileUrl) {
+    private void setFilePath(String fileUrl) {
         this.filePath = fileUrl;
     }
 
@@ -127,8 +138,6 @@ public class FileDisplayActivity extends AppCompatActivity {
                 return;
             }
         }
-
-
 
         LoadFileModel.loadPdfFile(url, new Callback<ResponseBody>() {
             @Override
@@ -263,6 +272,5 @@ public class FileDisplayActivity extends AppCompatActivity {
         TLog.d(TAG,"paramString.substring(i + 1)------>"+str);
         return str;
     }
-
 
 }

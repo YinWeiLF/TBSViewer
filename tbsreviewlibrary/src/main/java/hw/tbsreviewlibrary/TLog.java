@@ -5,7 +5,7 @@ import android.util.Log;
 
 public final class TLog {
     private static final String LOG_TAG = "superFileLog";
-    private static boolean DEBUG = false;
+    private static boolean DEBUG = true;
 
     private TLog() {
     }

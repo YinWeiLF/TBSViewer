@@ -1,8 +1,6 @@
-package hw.tbsreviewlibrary;
+package hw.tbsreviewlibrary.view;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +16,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import hw.tbsreviewlibrary.FileShowView;
+import hw.tbsreviewlibrary.LoadFileModel;
+import hw.tbsreviewlibrary.R;
+import hw.tbsreviewlibrary.SuperFileView2;
+import hw.tbsreviewlibrary.TLog;
+import hw.tbsreviewlibrary.utils.Md5Tool;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +33,7 @@ import retrofit2.Response;
  * @author yinWei
  */
 
-public class FileDisplayView  extends FrameLayout{
+public class XFileDisplayView extends FrameLayout implements FileShowView {
 
 
     private String TAG = "FileDisplayView";
@@ -39,17 +43,17 @@ public class FileDisplayView  extends FrameLayout{
     ProgressBar progressDialog;
 
 
-    public FileDisplayView(@NonNull Context context) {
+    public XFileDisplayView(@NonNull Context context) {
         this(context,null);
 
     }
 
-    public FileDisplayView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public XFileDisplayView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs,0);
 
     }
 
-    public FileDisplayView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public XFileDisplayView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context);
 
@@ -62,7 +66,7 @@ public class FileDisplayView  extends FrameLayout{
      View view= LayoutInflater.from(context).inflate(R.layout.view_file_display,null);
      this.addView(view);
      init(view);
-
+     
     }
 
 
@@ -80,10 +84,12 @@ public class FileDisplayView  extends FrameLayout{
 
     }
 
+
     /**
      * 主动调用展示文件
      * @param path
      */
+    @Override
     public void showFile(String path){
 
         if (!TextUtils.isEmpty(path)) {
@@ -92,6 +98,7 @@ public class FileDisplayView  extends FrameLayout{
         }
         mSuperFileView.show();
     }
+
 
 
     private void getFilePathAndShowFile(SuperFileView2 mSuperFileView2) {
@@ -109,7 +116,7 @@ public class FileDisplayView  extends FrameLayout{
 
     //主动调用
     public void release(){
-        TLog.d("FileDisplayActivity-->onDestroy");
+        TLog.d("XFileDisplay-->onDestroy");
         if (mSuperFileView != null) {
             mSuperFileView.onStopDisplay();
         }
@@ -121,15 +128,6 @@ public class FileDisplayView  extends FrameLayout{
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         release();
-
-    }
-
-    public static void show(Context context, String url) {
-        Intent intent = new Intent(context, FileDisplayActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("path", url);
-        intent.putExtras(bundle);
-        context.startActivity(intent);
 
     }
 
