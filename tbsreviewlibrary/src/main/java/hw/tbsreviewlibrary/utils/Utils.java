@@ -14,6 +14,10 @@ import hw.tbsreviewlibrary.ExceptionHandler;
 
 public class Utils {
 
+    /**
+     * 初始化x5 和工具类
+     * @param context
+     */
     public static void initX5Environment(Context context){
 
         QbSdk.initX5Environment(context,null);
