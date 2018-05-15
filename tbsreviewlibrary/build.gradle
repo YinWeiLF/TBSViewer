@@ -35,5 +35,5 @@ dependencies {
     implementation 'com.blankj:utilcode:1.14.2'
     //glide库
     compile 'com.github.bumptech.glide:glide:4.5.0'
-    implementation files('libs/tbs_sdk_thirdapp_v3.1.0.1034_43100_sharewithdownload_obfs_20170301_182143.jar')
+    implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1234_43608_sharewithdownload_withoutGame_obfs_20180510_111111.jar')
 }
