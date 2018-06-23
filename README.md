@@ -25,7 +25,7 @@ allprojects {
 ```
 dependencies {
 
-	   compile 'com.github.YinWeiLF:TBSViewer:v1.0.4'
+	   compile 'com.github.YinWeiLF:TBSViewer:v1.0.6'
 	   
 	}
 ```
