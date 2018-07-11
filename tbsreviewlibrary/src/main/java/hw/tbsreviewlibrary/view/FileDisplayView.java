@@ -36,6 +36,7 @@ public class FileDisplayView{
 
 
     private String TAG = "FileDisplayView";
+    private static  final String CACHNAME = "DocBrowser";
     SuperFileView2 mSuperFileView;
 
     String filePath;
@@ -220,7 +221,7 @@ public class FileDisplayView{
      */
     private File getCacheDir(String url) {
 
-        return new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/007/");
+        return new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/DocBrowser/");
 
     }
     /***
@@ -230,7 +231,7 @@ public class FileDisplayView{
      * @return
      */
     private File getCacheFile(String url) {
-        File cacheFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/007/"
+        File cacheFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/DocBrowser/"
                 + "."+getFileName(url));
         TLog.d(TAG, "缓存文件 = " + cacheFile.toString());
         return cacheFile;
