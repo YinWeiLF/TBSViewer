@@ -2,8 +2,6 @@ package hw.tbsreviewlibrary.view;
 
 import android.content.Context;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -44,17 +42,17 @@ public class XFileDisplayView extends FrameLayout implements FileShowView {
     ProgressBar progressDialog;
 
 
-    public XFileDisplayView(@NonNull Context context) {
+    public XFileDisplayView( Context context) {
         this(context,null);
 
     }
 
-    public XFileDisplayView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public XFileDisplayView(Context context, AttributeSet attrs) {
         this(context, attrs,0);
 
     }
 
-    public XFileDisplayView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public XFileDisplayView( Context context,  AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context);
 
