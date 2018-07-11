@@ -1,24 +1,14 @@
 package com.yw.tbs;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-import hw.tbsreviewlibrary.utils.VideoUtils;
 
-
-public class MainActivity extends AppCompatActivity {
-
-    RecyclerView mRecyclerView;
+public class MainActivity extends Activity {
     private String filePath;
     private List<String> datas = new ArrayList<>();
     private List<String> paths = new ArrayList<>();
@@ -30,52 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
         initDatas();
         initPaths();
-
-
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.mRecyclerView);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new RecyclerView.Adapter() {
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-                return new RecyclerView.ViewHolder(LayoutInflater.from(MainActivity.this).inflate(R.layout.item, parent, false)) {
-                };
-
-            }
-
-            @Override
-            public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-                holder.itemView.findViewById(R.id.item_root).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        if(position<6) {
-
-                            filePath = getFilePath(position);
-
-                        }else{
-
-
-                            Toast.makeText(MainActivity.this,"咋回事？",1).show();
-
-                            VideoUtils.OpenVideo(MainActivity.this,"https://res.exexm.com/cw_145225549855002");
-
-
-
-                        }
-
-                    }
-                });
-                ((TextView) holder.itemView.findViewById(R.id.item_tv)).setText(getDatas().get(position));
-            }
-
-            @Override
-            public int getItemCount() {
-                return getDatas().size();
-            }
-        });
-
 
 
     }

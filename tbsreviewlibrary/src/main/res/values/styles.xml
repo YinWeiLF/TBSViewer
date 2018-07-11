@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="videoTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="videoTheme" parent="@android:style/Theme.Translucent.NoTitleBar">
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@drawable/black_bg</item>
     </style>
