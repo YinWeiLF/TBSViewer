@@ -19,6 +19,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+//        MultiDex.install(this);
         //增加这句话
         Utils.initX5Environment(this);
 
