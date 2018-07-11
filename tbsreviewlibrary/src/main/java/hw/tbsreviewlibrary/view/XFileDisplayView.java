@@ -37,6 +37,7 @@ public class XFileDisplayView extends FrameLayout implements FileShowView {
 
 
     private String TAG = "FileDisplayView";
+    private static  final String CACHNAME = "DocBrowser";
     SuperFileView2 mSuperFileView;
 
     String filePath;
@@ -196,13 +197,15 @@ public class XFileDisplayView extends FrameLayout implements FileShowView {
                     TLog.d(TAG, "文件下载异常 = " + e.toString());
                 } finally {
                     try {
-                        if (is != null)
+                        if (is != null) {
                             is.close();
+                        }
                     } catch (IOException e) {
                     }
                     try {
-                        if (fos != null)
+                        if (fos != null) {
                             fos.close();
+                        }
                     } catch (IOException e) {
                     }
 
@@ -233,7 +236,7 @@ public class XFileDisplayView extends FrameLayout implements FileShowView {
      */
     private File getCacheDir(String url) {
 
-        return new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/007/");
+        return new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+CACHNAME+"/");
 
     }
     /***
@@ -243,7 +246,7 @@ public class XFileDisplayView extends FrameLayout implements FileShowView {
      * @return
      */
     private File getCacheFile(String url) {
-        File cacheFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/007/"
+        File cacheFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+CACHNAME+"/"
                 + "."+getFileName(url));
         TLog.d(TAG, "缓存文件 = " + cacheFile.toString());
         return cacheFile;

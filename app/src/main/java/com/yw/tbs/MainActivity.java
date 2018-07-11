@@ -13,7 +13,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import hw.tbsreviewlibrary.FileDisplayActivity;
 import hw.tbsreviewlibrary.utils.VideoUtils;
 
 
@@ -54,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
                         if(position<6) {
 
                             filePath = getFilePath(position);
-                            FileDisplayActivity.show(MainActivity.this, filePath);
 
                         }else{
 

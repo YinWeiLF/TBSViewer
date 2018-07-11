@@ -14,7 +14,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import hw.tbsreviewlibrary.FileDisplayActivity;
 import hw.tbsreviewlibrary.LoadFileModel;
 import hw.tbsreviewlibrary.R;
 import hw.tbsreviewlibrary.SuperFileView2;
@@ -89,8 +88,8 @@ public class FileDisplayView{
 
     private void getFilePathAndShowFile(SuperFileView2 mSuperFileView2) {
 
-
-        if (getFilePath().contains("http")) {//网络地址要先下载
+         //网络地址要先下载
+        if (getFilePath().contains("http")) {
 
             downLoadFromNet(getFilePath(),mSuperFileView2);
 
@@ -109,15 +108,6 @@ public class FileDisplayView{
 
     }
 
-
-    public static void show(Context context, String url) {
-        Intent intent = new Intent(context, FileDisplayActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("path", url);
-        intent.putExtras(bundle);
-        context.startActivity(intent);
-
-    }
 
     private void setFilePath(String fileUrl) {
         this.filePath = fileUrl;
@@ -184,13 +174,15 @@ public class FileDisplayView{
                     TLog.d(TAG, "文件下载异常 = " + e.toString());
                 } finally {
                     try {
-                        if (is != null)
+                        if (is != null) {
                             is.close();
+                        }
                     } catch (IOException e) {
                     }
                     try {
-                        if (fos != null)
+                        if (fos != null) {
                             fos.close();
+                        }
                     } catch (IOException e) {
                     }
 
@@ -221,7 +213,7 @@ public class FileDisplayView{
      */
     private File getCacheDir(String url) {
 
-        return new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/DocBrowser/");
+        return new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+CACHNAME+"/");
 
     }
     /***
@@ -231,7 +223,7 @@ public class FileDisplayView{
      * @return
      */
     private File getCacheFile(String url) {
-        File cacheFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/DocBrowser/"
+        File cacheFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+CACHNAME+"/"
                 + "."+getFileName(url));
         TLog.d(TAG, "缓存文件 = " + cacheFile.toString());
         return cacheFile;
